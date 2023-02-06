@@ -1,0 +1,24 @@
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--nav-bg);
+  color: var(--primary-font-color);
+  padding: 10px 0;
+  cursor: default;
+  div {
+    margin-right: 10px;
+  }
+  h1 {
+    font-family: "Roboto";
+  }
+}
+
+@media screen and (max-width: 731px) {
+  .navbar-container {
+    justify-content: space-evenly;
+    h1 {
+        font-size: 1.5rem;
+    }
+  }
+}

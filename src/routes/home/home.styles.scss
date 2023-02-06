@@ -1,0 +1,58 @@
+.home-view-container {
+  .options-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: stretch;
+    margin: 10px 0;
+    div,
+    button {
+    }
+    div {
+      label {
+        color: var(--primary-font-color);
+        &[data-shrink="true"] {
+            color: var(--primary-yello);
+        }
+        
+      }
+      div {
+        input {
+            color: #ffffff;
+            background-color: #13111193;
+            font-size: 15px;
+            padding: 27px 25px 8px 20px;
+        }
+      }
+    }
+    button {
+        span {
+            margin-bottom: 4px;
+            button {
+                svg {
+                    fill: #fff;
+                }
+            }
+        }
+    }
+  }
+}
+
+@media screen and (max-width: 731px) {
+  .home-view-container {
+    margin: 0;
+    .options-container {
+      flex-direction: column;
+      max-width: 70%;
+      margin: auto;
+      div {
+        margin: 10px 0;
+        label {
+            padding-top: 5px;
+            &[data-shrink="true"] {
+                padding-top: 5px;
+            }
+        }
+      }
+    }
+  }
+}
