@@ -11,8 +11,8 @@ const QRModelView = ({ qrcode }) => {
         <GButton
           btnName="Download QR Code"
           endIcon={
-            <IconButton>
-              <DownloadIcon />
+            <IconButton className="text-display-none">
+              <DownloadIcon /> icon
             </IconButton>
           }
         />

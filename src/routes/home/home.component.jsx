@@ -1,16 +1,30 @@
+import React, { Suspense, useEffect, useState } from "react";
 import QRCode from "qrcode";
-import { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
-
-import Navbar from "../../components/navbar/navbar.component";
-import Input from "../../components/input/input.component";
-import GButton from "../../components/g-button/g-button.component";
-import QRModelView from "../../components/qr-model-view/qr-model-view.component";
-import Footer from "../../components/footer/footer.component";
-import BackgroundWaves from "../../components/background-waves/background-waves.component";
+import Loading from "../../components/loading/loading.component";
 
 import "./home.styles.scss";
+
+const Navbar = React.lazy(() =>
+  import("../../components/navbar/navbar.component")
+);
+const Input = React.lazy(() =>
+  import("../../components/input/input.component")
+);
+const GButton = React.lazy(() =>
+  import("../../components/g-button/g-button.component")
+);
+const QRModelView = React.lazy(() =>
+  import("../../components/qr-model-view/qr-model-view.component")
+);
+const Footer = React.lazy(() =>
+  import("../../components/footer/footer.component")
+);
+const BackgroundWaves = React.lazy(() =>
+  import("../../components/background-waves/background-waves.component")
+);
+
 const Home = () => {
   const [url, setUrl] = useState("");
   const [btnStatus, setBtnStatus] = useState(true);
@@ -48,27 +62,41 @@ const Home = () => {
 
   return (
     <div className="home-view-container">
-      <Navbar title="Welcome to QR Generator" />
+      <Suspense fallback={<Loading />}>
+        <Navbar title="Welcome to QR Generator" />
+      </Suspense>
       <div className="options-container">
-        <Input
-          text="Paste your link in here.."
-          value={url}
-          onChange={handleChange}
-        />
-        <GButton
-          btnName="Generate QR Code"
-          btnStatus={btnStatus}
-          endIcon={
-            <IconButton>
-              <SettingsSuggestIcon />
-            </IconButton>
-          }
-          onClick={GenerateQRCode}
-        />
+        <Suspense fallback={<Loading />}>
+          <Input
+            text="Paste your link in here.."
+            value={url}
+            onChange={handleChange}
+          />
+        </Suspense>
+        <Suspense fallback={<Loading />}>
+          <GButton
+            btnName="Generate QR Code"
+            btnStatus={btnStatus}
+            endIcon={
+              <IconButton className="text-display-none">
+                <SettingsSuggestIcon /> icon
+              </IconButton>
+            }
+            onClick={GenerateQRCode}
+          />
+        </Suspense>
       </div>
-      {qrcode && <QRModelView qrcode={qrcode} />}
-      <BackgroundWaves />
-      <Footer />
+      {qrcode && (
+        <Suspense fallback={<Loading />}>
+          <QRModelView qrcode={qrcode} />
+        </Suspense>
+      )}
+      <Suspense fallback={<Loading />}>
+        <BackgroundWaves />
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Footer />
+      </Suspense>
     </div>
   );
 };
