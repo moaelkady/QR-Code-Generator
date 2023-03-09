@@ -42,8 +42,7 @@ const Home = () => {
         margin: 1,
       },
       (err, url) => {
-        if (err) return console.error(err);
-        console.log(url);
+        if (err) return;
         setQrcode(url);
       }
     );
